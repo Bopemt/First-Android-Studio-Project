@@ -7,17 +7,18 @@ import android.graphics.Paint;
 import androidx.core.content.ContextCompat;
 
 public class Board {
-    public int startX, startY;
+    public float startX, startY;
     public int cellSize;
     public int sizeX, sizeY;
     public int[][] field;
     private Paint paint;
 
-    public Board(Context context, int startX, int startY, int boardSizeX, int boardSizeY, int cellSize){
-        this.startX = startX;
-        this.startY = startY;
+
+    public Board(Context context, float mWidth, float mHeight, int boardSizeX, int boardSizeY, int cellSize){
         this.sizeX = boardSizeX;
         this.sizeY = boardSizeY;
+        this.startX = mWidth / 2 - ((float)sizeX / 2 * cellSize);
+        this.startY = mHeight / 2 - ((float)sizeY / 2 * cellSize);
         this.cellSize = cellSize;
 
         this.field = new int[sizeY][sizeX];

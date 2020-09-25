@@ -21,6 +21,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
     private Board board;
     private PathFinder pathFinder;
     private GestureDetectorCompat mDetector;
+    private float mWidth= this.getResources().getDisplayMetrics().widthPixels;
+    private float mHeight= this.getResources().getDisplayMetrics().heightPixels;
 
     public Game(Context context) {
         super(context);
@@ -30,7 +32,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
 
         gameLoop = new GameLoop(this, surfaceHolder);
 
-        board = new Board(getContext(), 50, 50, 9, 5, 150);
+        board = new Board(getContext(), mWidth, mHeight, 7, 6, 150);
         player = new Player(getContext(), board, 3, 2, 30);
         pathFinder = new PathFinder(player, board);
         player.setPathFinder(pathFinder);

@@ -63,10 +63,10 @@ public class Player {
     }
 
     private float getCoorX(){
-        return board.startX + board.cellSize*positionX + (board.cellSize >> 1);
+        return board.startX + board.cellSize*positionX + (float)board.cellSize / 2;
     }
 
     private float getCoorY(){
-        return board.startY + board.cellSize*positionY + (board.cellSize >> 1);
+        return board.startY + board.cellSize*positionY + (float)board.cellSize / 2;
     }
 }
