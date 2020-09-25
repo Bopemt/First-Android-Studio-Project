@@ -47,7 +47,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
         if (this.mDetector.onTouchEvent(e)) {
             return true;
         }
-        // Handle touch event actions
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             return true;
         }
@@ -150,7 +149,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        //System.out.println("real one tap");
         return false;
     }
 
@@ -168,16 +166,4 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
-
-    /*@Override
-    public boolean onDoubleTap(MotionEvent e) {
-        if(board.inBoard(e.getX(), e.getY())) {
-            if(board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] != -2)
-                board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] = -2;
-            else{
-                board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] = 0;
-            }
-        }
-        return true;
-    }*/
 }

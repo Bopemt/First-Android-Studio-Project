@@ -4,10 +4,8 @@ public class PathFinder {
     private Player player;
     private Board board;
 
-    private int[] wayI;
-    private int[] wayJ;
-    private int[] queueI;
-    private int[] queueJ;
+    private int[] wayI, wayJ;
+    private int[] queueI, queueJ;
     private int step = -1;
     private int p;
     private int problemo;
@@ -48,13 +46,6 @@ public class PathFinder {
                 visit++;
             }
         }
-
-        for (int _i = 0; _i < board.sizeY; _i++){
-            for (int _j = 0; _j < board.sizeX; _j++){
-                System.out.print(board.field[_i][_j] + "  ");
-            }
-            System.out.println('\n');
-        }
     }
 
     public void FindPath(int destinationX, int destinationY){
@@ -83,14 +74,6 @@ public class PathFinder {
                 destY = wayI[step];
                 destX = wayJ[step];
             }
-            for(int k = 0; k<step; k++){
-                System.out.print(wayI[k]);
-            }
-            System.out.println("J");
-            for(int k = 0; k<step; k++){
-                System.out.print(wayJ[k]);
-            }
-            System.out.println("J");
         }
         step--;
     }

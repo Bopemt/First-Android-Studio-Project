@@ -10,8 +10,7 @@ public class Player {
     private int positionX, positionY;
     private float radius;
     private Paint paint;
-    private float delay;
-    private float delaySec;
+    private float delay, delaySec;
 
     private Board board;
     private PathFinder pathFinder;
@@ -68,6 +67,6 @@ public class Player {
     }
 
     private float getCoorY(){
-        return board.startY + board.cellSize*positionY + board.cellSize / 2;
+        return board.startY + board.cellSize*positionY + (board.cellSize >> 1);
     }
 }
