@@ -15,10 +15,10 @@ public class Board {
 
 
     public Board(Context context, float mWidth, float mHeight, int boardSizeX, int boardSizeY, int cellSize){
+        this.startX = mWidth / 2 - ((float)boardSizeX / 2 * cellSize);
+        this.startY = mHeight / 2 - ((float)boardSizeY / 2 * cellSize);
         this.sizeX = boardSizeX;
         this.sizeY = boardSizeY;
-        this.startX = mWidth / 2 - ((float)sizeX / 2 * cellSize);
-        this.startY = mHeight / 2 - ((float)sizeY / 2 * cellSize);
         this.cellSize = cellSize;
 
         this.field = new int[sizeY][sizeX];
