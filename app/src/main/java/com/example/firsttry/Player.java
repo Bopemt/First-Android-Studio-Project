@@ -7,19 +7,15 @@ import android.graphics.Paint;
 import androidx.core.content.ContextCompat;
 
 public class Player {
-    private int positionX, positionY;
-    private float radius;
-    private Paint paint;
-    private float delay, delaySec;
+    private static int positionX, positionY;
+    private static float radius;
+    private static Paint paint;
+    private static float delay, delaySec;
 
-    private Board board;
-    private PathFinder pathFinder;
-
-    public Player(Context context, Board board, int positionX, int positionY, float radius){
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.radius = radius;
-        this.board = board;
+    public Player(Context context, int positionX, int positionY, float radius){
+        Player.positionX = positionX;
+        Player.positionY = positionY;
+        Player.radius = radius;
 
         delay = 15;
         delaySec = delay;
@@ -28,19 +24,15 @@ public class Player {
         paint.setColor(color);
     }
 
-    public void setPathFinder(PathFinder pathFinder) {
-        this.pathFinder = pathFinder;
-    }
-
-    public void draw(Canvas canvas) {
+    public static void draw(Canvas canvas) {
         canvas.drawCircle(getCoorX(), getCoorY(), radius, paint);
     }
 
-    public void update() {
+    public static void update() {
         if(delaySec <= 0){
-            if(pathFinder.getStep() >= 0){
-                setPosition(pathFinder.getWayJ()[pathFinder.getStep()], pathFinder.getWayI()[pathFinder.getStep()]);
-                pathFinder.setStep(pathFinder.getStep() - 1);
+            if(PathFinder.getStep() >= 0){
+                setPosition(PathFinder.getWayJ()[PathFinder.getStep()], PathFinder.getWayI()[PathFinder.getStep()]);
+                PathFinder.setStep(PathFinder.getStep() - 1);
                 delaySec = delay;
             }
         }
@@ -49,24 +41,24 @@ public class Player {
         }
     }
 
-    public void setPosition(int positionX, int positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+    public static void setPosition(int positionX, int positionY) {
+        Player.positionX = positionX;
+        Player.positionY = positionY;
     }
 
-    public int getPositionX(){
+    public static int getPositionX(){
         return positionX;
     }
 
-    public int getPositionY(){
+    public static int getPositionY(){
         return positionY;
     }
 
-    private float getCoorX(){
-        return board.startX + board.cellSize*positionX + (float)board.cellSize / 2;
+    private static float getCoorX(){
+        return Board.startX + Board.cellSize *positionX + (float) Board.cellSize / 2;
     }
 
-    private float getCoorY(){
-        return board.startY + board.cellSize*positionY + (float)board.cellSize / 2;
+    private static float getCoorY(){
+        return Board.startY + Board.cellSize *positionY + (float) Board.cellSize / 2;
     }
 }

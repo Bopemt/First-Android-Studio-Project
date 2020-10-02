@@ -16,13 +16,8 @@ import androidx.core.view.GestureDetectorCompat;
 public class Game extends SurfaceView implements SurfaceHolder.Callback,
         GestureDetector.OnGestureListener,
         GestureDetector.OnDoubleTapListener{
-    private final Player player;
     private GameLoop gameLoop;
-    private Board board;
-    private PathFinder pathFinder;
     private GestureDetectorCompat mDetector;
-    private float mWidth= this.getResources().getDisplayMetrics().widthPixels;
-    private float mHeight= this.getResources().getDisplayMetrics().heightPixels;
 
     public Game(Context context) {
         super(context);
@@ -32,10 +27,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
 
         gameLoop = new GameLoop(this, surfaceHolder);
 
-        board = new Board(getContext(), mWidth, mHeight, 7, 6, 150);
-        player = new Player(getContext(), board, 3, 2, 30);
-        pathFinder = new PathFinder(player, board);
-        player.setPathFinder(pathFinder);
+        float mWidth = this.getResources().getDisplayMetrics().widthPixels;
+        float mHeight = this.getResources().getDisplayMetrics().heightPixels;
+        new Board(getContext(), mWidth, mHeight, 7, 6, 150);
+        new Player(getContext(), 3, 2, 30);
 
         setFocusable(true);
 
@@ -77,8 +72,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
         drawFPS(canvas);
         drawUPS(canvas);
 
-        board.draw(canvas);
-        player.draw(canvas);
+        Board.draw(canvas);
+        Player.draw(canvas);
     }
 
     public void drawUPS(Canvas canvas){
@@ -100,23 +95,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     public void update() {
-        player.update();
+        Player.update();
     }
 
     public int coor2PosX(float coorX){
-        return (int)(coorX - board.startX) / board.cellSize;
+        return (int)(coorX - Board.startX) / Board.cellSize;
     }
 
     public int coor2PosY(float coorY){
-        return (int)(coorY - board.startY) / board.cellSize;
+        return (int)(coorY - Board.startY) / Board.cellSize;
     }
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
         System.out.println("OneTAP");
-        if(board.inBoard(e.getX(), e.getY())) {
-            pathFinder.FillBoard();
-            pathFinder.FindPath(coor2PosX(e.getX()), coor2PosY(e.getY()));
+        if(Board.inBoard(e.getX(), e.getY())) {
+            PathFinder.FillBoard();
+            PathFinder.FindPath(coor2PosX(e.getX()), coor2PosY(e.getY()));
         }
         return true;
     }
@@ -124,11 +119,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public boolean onDoubleTap(MotionEvent e) {
         System.out.println("DoubleTap");
-        if(board.inBoard(e.getX(), e.getY())) {
-            if(board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] != -2)
-                board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] = -2;
+        if(Board.inBoard(e.getX(), e.getY())) {
+            if(Board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] != -2)
+                Board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] = -2;
             else{
-                board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] = 0;
+                Board.field[coor2PosY(e.getY())][coor2PosX(e.getX())] = 0;
             }
         }
         return true;
